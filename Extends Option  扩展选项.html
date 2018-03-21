@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Extends Option  扩展选项</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Extends Option  扩展选项</h1>
+        <h3>执行顺序:  扩展的比原生的先执行 </h3>
+        <hr>
+        <p>{{num}}</p>
+        <button @click="add">按钮</button>
+
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var extendsObj = {
+            updated:function(){
+                console.log('我是扩展的updated');
+            },
+            methods:{
+                add:function(){
+                    console.log('我是扩展的add 方法');
+                    //扩展的add 方法不能被执行
+                    this.num++
+                    }
+            }
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    console.log('我是原生的add 方法');
+                    
+                    this.num++
+                    }
+            },
+            updated:function(){
+                console.log('我是原生的updated')
+            },
+            //注意 : 这里不是一个数组 
+            extends:extendsObj
+        })
+    
+    
+    </script>
+</body>
+</html>

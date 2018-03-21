@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mixins 混入选项操作</title>
+</head>
+<body>
+    <h1>Mixins 混入选项操作</h1>
+    <h3>执行顺序特点:  全局的混入 会比局部的混入先执行  局部的混入会比原生的混入先执行</h3>
+    <!-- 用于功能很成熟的时候 不想要污染自己的功能 -->
+    <hr>
+    <div id="app">
+        <p>{{num}}</p>
+        <button @click="add">按钮</button>
+
+    </div>  
+    <script src="./vue.js"></script>  
+    <script>
+        //updated   生命周期钩子函数
+        var addConsole = {
+            updated:function(){
+                console.log('数据发生变化了,变化成了'+this.num);
+                
+            }
+        }
+        //全局的混入   mixin  不需要添加s
+        Vue.mixin({
+            updated:function(){
+                console.log("我是全局的混入");
+                
+            }
+        })
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+            },
+            //原生中也有个updated
+            //混入的会先执行  原生的后执行
+            updated:function(){
+                console.log('我是原生的updated');
+                
+            },
+            //混入  
+            //是一个数组  可以混入多个
+            mixins:[addConsole]
+        })
+    
+    
+    
+    
+    </script>
+</body>
+</html>

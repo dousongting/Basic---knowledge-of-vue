@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1> 内置组件 slot </h1>
+        <dousongting>
+            <!-- 利用slot 传递值 -->
+            <span slot="url">{{dstData.url}}</span>
+            <span slot="name">{{dstData.name}}</span>
+        </dousongting>
+        <hr>
+
+
+
+
+    </div>
+    <template id="tep">
+        <div>
+            <!-- 在模板中利用 slot 接收 -->
+                <p>网址:<slot name="url"></slot></p>
+                <p>名称:<slot name="name"></slot></p>
+        </div>
+    </template>
+    <script src="./vue.js"></script>
+    <script>
+        var dousongting = {
+            template:'#tep'
+        }
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                dstData:{
+                    url:'http://baidu.com',
+                name:'百度一下你就知道'
+                }
+            },
+            components:{
+                //起的名字     // 模板的名称
+                'dousongting':dousongting
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    
+
+    </div>
+    <button onclick="destroy()">卸载</button>
+    <button onclick="reload()">刷新</button>
+    <button onclick="tick()">更改数据</button>
+    <script>
+        var dst = Vue.extend({
+            template:`<p>{{message}}</p>`,
+            data:function(){
+                return{
+                    message: 'Hello I am dst'
+                }
+            },
+            //挂载
+            mounted:function(){
+                console.log('mounted被创建');
+                
+            },
+            //销毁
+            destroyed:function(){
+                console.log('销毁了');
+                
+            },
+            //更新
+            updated:function(){
+                console.log('数据更新了');
+                
+            },
+
+
+        })
+        var vm = new dst().$mount("#app")
+        function destroy(){
+            // console.log('被卸载了');
+            //销毁方法
+            vm.$destroy();//挂载到vm 实例上    记住要加括号
+            
+        }
+        function reload(){
+            //更新方法
+            vm.$forceUpdate();//挂载到vm 实例上    记住要加括号
+            
+        }
+        function tick(){
+            vm.message = '快乐的一只小跳蛙'
+            vm.$nextTick(function(){
+                console.log('message 更新了');
+                
+            })
+        }
+
+
+        //总结:
+        //$mount  挂载的方法
+        //$destory 销毁的方法
+        //$forceUpdate   更新的方法
+        //$nextTick    可以检测到数据被修改了
+    </script>
+</body>
+</html>

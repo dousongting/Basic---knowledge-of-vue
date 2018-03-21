@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <dousongting></dousongting> -->
+    <div id="dousongting"></div>
+    <script src="./vue.js"></script>
+    <script>
+        //创建一个构造器
+        var dousongtingExtend = Vue.extend({
+            //:href  v-bind  缩写
+            template:"<p><a :href='Url' target='_blank'>{{text}}</a></p>",
+            data:function(){
+                return {
+                    text:'百度一下,你就知道',
+                    Url:'http://www.baidu.com'
+                }
+            }
+
+        })
+        // new dousongtingExtend().$mount('dousongting');
+        new dousongtingExtend().$mount('#dousongting');
+    
+    
+    </script>
+</body>
+</html>

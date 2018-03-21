@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+            <p>{{message}}</p>
+            <p>{{num}}</p>
+            <button @click="add">增加</button>
+    </div>
+    <!-- 在外部调用在加() 括号 -->
+    <button onclick="reduce()">减少</button>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                message:'你好啊',
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            }
+
+        })
+        //参数1: 事件名 
+        //参数2: 回调函数
+        vm.$on('reduce',function(){
+            console.log('reduce方法被调用了');
+            
+            this.num--;
+        })
+        function reduce(){
+            vm.$emit('reduce')
+        }
+    
+        //注意  用$on 注册的事件 要用$emit  调用
+    
+    </script>
+</body>
+</html>

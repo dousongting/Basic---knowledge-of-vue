@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML5使用 getUserMedia方法调用本地摄像头拍照</title>
+    <style>
+        video {
+            float: left
+        }
+        canvas {
+            float: right
+        }
+        button {
+            position: fixed;
+            bottom:0;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+            HTML5使用 getUserMedia方法调用本地摄像头拍照
+    </h1>
+    <hr>
+    <video id="video" autoplay="autoplay" style="width:640px;height:480px"></video>
+    <button id="picture">拍照 茄子</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script>
+        var video = document.getElementById('video');
+        var context = canvas.getContext('2d');
+        navigator.getUserMedia  = navigator.getUserMedia ||
+                                  navigator.webkitGetUserMedia ||
+                                  navigator.mozGetUserMedia ||
+                                  navigator.msGetUserMedia;
+        var constraints = {
+        video: true
+        }
+        function successCallback(stream) {
+        // 此处利用该 window.URL 对象的 createObjectURL 方法将 blob 转为 url。
+        if (window.URL) {
+            video.src = window.URL.createObjectURL(stream); // 用来创建 video 可以播放的 src
+        } else {
+            video.src = stream;
+        }
+        }
+        function errorCallback(error) {
+            console.log('navigator.getUserMedia error: ', error);
+        }
+        if (navigator.getUserMedia) {
+            //参数1:constraints 指定媒体对象的类型，比如是获取摄像头还是麦克风，是前置摄像头还是后置
+            //参数2:successCallback 调用成功后的回调方法
+            //参数3:errorCallback 调用失败后的回调方法
+             navigator.getUserMedia(constraints, successCallback, errorCallback);
+        } else {
+            console.log('getUserMedia() is not supported in your browser')
+            video.src = 'somevideo.webm'; // fallback.
+        }
+
+        //将拍好的照片显示在画布上 
+        document.getElementById('picture').addEventListener('click',function(){
+            context.drawImage(video,0,0,640,480);
+        })
+    
+    </script>
+</body>
+</html>

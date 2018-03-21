@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 定义一个全局的组件 -->
+        <dousongting></dousongting>
+        <hcw></hcw>
+
+    </div>
+    <div id="app1">
+            <!-- 定义一个全局的组件 -->
+            <dousongting></dousongting>
+            
+    
+        </div>
+    <script src="./vue.js"></script>
+    <script>
+        //定义一个全局的组件 
+        //参数1: 组件的名字
+        //参数2: 一个对象
+        Vue.component('dousongting',{
+            // 模板字符串
+            template:`
+                <div style="color:blue">我是一个全局的dousongting组件</div>
+            `
+        })
+        var vm = new Vue({
+            el:'#app',
+            //定义局部的组件 
+            //局部的组件components  因为可以定义多个  全局的只能定义一个
+            //参数1: 组件的名字  必须是一个字符串类型的
+            //参数2:一个对象  模板template
+            components:{
+                'hcw':{
+                template: ` <div style="color:yellow">我是一个局部的hcw组件</div>`  
+                }
+            }
+    
+        })
+        var vm = new Vue({
+            el:'#app1',
+    
+        })
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <hcw></hcw>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        //在构造器的外面声明一个组件
+        //父子组件的关系
+        //子组件要在上面  因为 代码是自上而下执行 否则会报错
+        var city = {
+            template:`<div style="color:blue">shanghai of china</div>`
+        }
+        var hcwdsb = {
+            template:`<div>
+            <p style="color:hotpink">hcw from shanghai</p>
+            <city></city>
+            </div>`,
+            components:{
+                'city':city
+            }
+        }
+       
+   
+        var vm = new Vue({
+            el:'#app',
+            //定义局部的组件 
+            //局部的组件components  因为可以定义多个  全局的只能定义一个
+            //参数1: 组件的名字  必须是一个字符串类型的
+            //参数2: 一个对象
+            components:{
+                'hcw':hcwdsb
+            }
+    
+        })
+       
+    
+    </script>
+</body>
+</html>

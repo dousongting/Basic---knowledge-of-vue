@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{newPrice}}
+        <ul>
+            <li v-for="item in reversNews">{{item.title}}
+                <span>{{item.date}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        var newList = [
+            {title:'今天天气很冷 下雨了',date:'2018/03/20'},
+            {title:'dj lkjd 下雨了',date:'2018/03/21'},
+            {title:'今天kd;las jfl',date:'2018/03/22'},
+            {title:'今天天气w w 了',date:'2018/03/23'},
+            {title:'今天天气ewd  w 很冷s f 下 wwe q雨了',date:'2018/03/24'},
+        ]
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                price:111,
+                newList:newList
+            },
+            computed:{
+                //computed  不会污染原始数据  
+                newPrice:function(){
+                    return this.price = this.price +'美元';
+                },
+                reversNews:function(){
+                    return this.newList.reverse();
+                }
+            }
+
+        })
+    
+    
+    </script>
+</body>
+</html>

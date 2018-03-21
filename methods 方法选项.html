@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{a}}
+        <button @click="add(2)">按钮</button>
+        <btn @click.native = "add(4)"></btn>
+    </div>
+    <button onclick='vm.add(6)'>外部的按钮</button>
+    <script src="./vue.js"></script>
+    <script>
+        var btn = {
+            template:`<button>组件btn</button>`
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                a:1
+            },
+            components:{
+                "btn":btn
+            },
+            methods:{
+                add:function(num){
+                    if(num != ''){
+                        this.a += num;
+                    }else{
+                        this.a++;
+                    }
+                    console.log(event);  //里面有很多事件 相当于原生的
+                    
+                    
+                }
+            }
+        })
+    
+    
+    </script>
+</body>
+</html>

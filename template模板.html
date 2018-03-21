@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>模板的三种用法</h1>
+        <hr>
+        {{message}}
+    </div>
+      <!-- 第二种 自定义标签 -->
+      <template id="app2">
+            <h2 style="color:aqua">我是template标签模板</h2>
+
+      </template>
+
+      <!-- 第三种模板 -->
+      <script type="x-template" id="app3">
+            <h2 style="color:purple">我是第三种script标签模板</h2>
+      </script>
+    <script src="./vue.js"></script>
+    <script>
+      var vm = new Vue({
+          el:'#app',
+          data:{
+              message:'你好',
+          },
+          //第一种  反引号
+        //   template:`
+        //     <h2 style="color:red">我是选项模板</h2>
+        //   `
+        // template:'#app2',
+        template:'#app3',
+      })
+    
+    </script>
+</body>
+</html>

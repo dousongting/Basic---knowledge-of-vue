@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{count}}
+        <ul>
+            <li v-for='item in arr'>{{item}}</li>
+        </ul>
+    </div>
+    <button onclick='add()'>add</button>
+    <script src="./vue.js"></script>
+    <script>
+        function add(){
+            // obj.count++;
+            // vm.count++;
+            // obj.arr[1] = 'ddd'
+            // Vue.set(obj.arr,1,'dd')
+            Vue.set(vm.arr,1,'dd')
+        }
+        var obj = {
+            count:1,
+            arr:['aaa','bbb','ccc']
+        }
+        //创建vue 实例 
+        var vm = new Vue({
+            el:'#app',
+            data:obj
+        })
+    
+    </script>
+</body>
+</html>

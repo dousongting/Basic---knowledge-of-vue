@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lodash.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <p>  Ask a yes/no question:<input type="text" v-model="question"></p>
+        <p>{{answer}}</p>
+        
+
+
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+    
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'早上好',
+                question:"",
+                answer:'I cannot give you an answer until you ask a question!'
+            },
+            watch:{
+                //参数1: 新的值 
+                //参数2: 旧值
+                question:function(newVal,oldVal){
+                    console.log('数据变化了');
+                    console.log(oldVal,newVal);
+                    this.answer = 'Waiting for you to stop typing...';
+                    //获取答案方法
+                    this.getAnswer()
+                    
+                }
+                
+            },
+            methods:{
+                //_.debounce  是一个通过Lodash 限制操作频率的函数
+                //在这个例子中 我们希望限制访问 yesno.wtf/api 的频率
+                //Ajax 请求直到用户输入完毕才会发出 
+                //想要了解更多关于
+                // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+                // 请参考：https://lodash.com/docs#debounce
+                getAnswer:_.debounce(
+                    function(){
+                        if(this.question.indexOf('?') === -1){
+                            this.answer = 'Questions usually contain a question mark. ;-)'
+                            return;
+                        }
+                        this.answer = "thinking..."
+                        var vm = this
+                        axios.get('http://yesno.wtf/api')
+                        .then(function(response){
+                            vm.answer = _.capitalize(response.data.answer)
+                        })
+                        .catch(function(error){
+                            vm.answer = 'Error! Could not reach the API. ' + error
+                        })
+                    },
+                    //这里是我们为判断用户停止输入等待的毫秒数
+                    500
+                )
+            }
+        })
+    
+    </script>
+</body>
+</html>

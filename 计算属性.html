@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>原始数据:{{message}}</p>
+        <p>计算后的数据:{{reversedMessage}}</p>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'我肚子疼'
+            },
+            //computed: 计算属性
+            computed:{
+                //计算属性的getter
+                //声明了一个计算属性 reversedMessage。我们提供的函数将用作属性 vm.reversedMessage 的 getter 函数：
+                reversedMessage:function(){
+                    //this 指向vm实例
+                    console.log(this);
+                    
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+    
+    
+    </script>
+    
+</body>
+</html>

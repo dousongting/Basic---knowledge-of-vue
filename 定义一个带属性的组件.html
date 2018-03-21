@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <hcw here='shanghai'></hcw> -->
+        <!-- 带 -  这样的  要用小驼峰的写法   (第一个单词小写  第二个单词大写  就是小驼峰) -->
+        <!-- <hcw from-here='shanghai'></hcw> -->
+        <hcw v-bind:here='message'></hcw>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                message:'shanghaiqq是的按的'
+            },
+            //定义局部的组件 
+            //局部的组件components  因为可以定义多个  全局的只能定义一个
+            //参数1: 组件的名字  必须是一个字符串类型的
+            //参数2:一个对象  模板template
+            components:{
+                'hcw':{
+                    //第一种
+                // template: ` <div style="color:pink">hcw from {{here}}</div>` ,
+                //第二种  解决- 的问题  小驼峰
+                // template: ` <div style="color:pink">hcw from {{fromHere}}</div>` ,
+                //第三种  写在data中的
+                template: ` <div style="color:pink">hcw from {{here}}</div>` ,
+                //props  选项是 一个数组   选项可以是很多个 
+                //将here  挂载到 props 中  
+                // props:['here'] 
+                // props:['fromHere'] ,
+                props:['here'] 
+                }
+            }
+    
+        })
+      
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>web AR demo2</h1>
+    <script>
+        
+        function getMedia() {
+
+                if (navigator.getUserMedia) {
+                
+                //参数1:constraints:指定媒体对象的类型，比如是获取摄像头还是麦克风，是前置摄像头还是后置
+                //参数2:successCallback:调用成功后的回调方法
+                //参数3:errorCallback: 调用失败
+
+                navigator.getUserMedia({
+
+                'video': {
+
+                'optional': [{
+
+                }]
+
+                }
+
+                }, successFunc, errorFunc);
+
+                }
+
+                else {
+
+                alert('Native device media streaming (getUserMedia) not supported in this browser.');
+
+                }
+
+                }
+
+                var localStream;function successFunc(stream) {
+
+                document.getElementById('video').src = window.URL && window.URL.createObjectURL(stream) || stream;
+
+                localStream = stream;
+
+                }
+
+                function errorFunc(e) {
+
+                alert('Error！'+e);
+
+                }
+
+                function closeMedia() {
+
+                localStream.stop(); document.getElementById('video').src = '';
+
+                }
+                        
+                        
+        
+        
+        </script>
+</body>
+</html>
